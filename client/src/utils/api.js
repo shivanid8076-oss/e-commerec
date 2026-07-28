@@ -6,7 +6,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api', // Proxied via Vite in dev
+  baseURL: import.meta.env.VITE_API_URL || '/api', // Uses env var in production, proxy in dev
   timeout: 10000,
   withCredentials: true, // CRITICAL: Send cookies with every request
   headers: {

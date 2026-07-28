@@ -58,7 +58,13 @@ app.use(
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || origin.startsWith('http://localhost') || origin.startsWith('http://192.168.') || origin.startsWith('http://127.0.0.1')) {
+      const allowedOrigins = [
+        'http://localhost:5173', 
+        'http://localhost:5000', 
+        process.env.CLIENT_URL
+      ].filter(Boolean); // filter out undefined if CLIENT_URL is not set
+
+      if (!origin || allowedOrigins.includes(origin) || origin.startsWith('http://192.168.') || origin.startsWith('http://127.0.0.1')) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
