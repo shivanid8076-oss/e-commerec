@@ -1116,46 +1116,54 @@
 /* ========== BESPOKE TRUST BADGES ========== */
 .h-trust { 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px; 
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; 
   padding: 60px 0; 
   margin: 0 auto; 
-  max-width: 1200px;
+  max-width: 800px;
 }
 .h-trust-item { 
   text-align: center; 
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 40px 30px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.02);
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s;
+  background: #ffffff;
+  padding: 30px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .h-trust-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
 }
 .h-trust-icon-svg { 
-  width: 45px;
-  height: 45px;
-  margin: 0 auto 20px;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 16px;
   color: var(--h-gold);
+  border: 1.5px solid var(--h-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.h-trust-icon-svg svg {
+  width: 24px;
+  height: 24px;
 }
 .h-trust-title { 
   display: block;
-  font-family: var(--h-font-display);
-  font-size: 1.15rem; 
-  font-weight: 600;
-  margin-bottom: 10px; 
-  color: var(--h-text);
+  font-family: var(--h-font-body);
+  font-size: 0.95rem; 
+  font-weight: 700;
+  color: #001f3f;
+  line-height: 1.4;
 }
 .h-trust-desc { 
-  display: block;
-  font-size: 0.9rem; 
-  color: var(--h-text-sec); 
-  line-height: 1.4;
+  display: none;
 }
 
 /* ========== FOOTER ========== */
@@ -1352,7 +1360,11 @@
   .h-mega, .h-mega-wide { display: none !important; }
   
   .glass-section { width: 100%; margin: 20px 0; padding: 30px 20px; border-radius: 0; }
-  .h-trust { flex-direction: column; gap: 30px; text-align: center; }
+  .h-trust { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px; padding: 20px 16px; text-align: center; }
+  .h-trust-item { padding: 20px 10px; }
+  .h-trust-title { font-size: 0.75rem; }
+  .h-trust-icon-svg { width: 40px; height: 40px; margin-bottom: 12px; }
+  .h-trust-icon-svg svg { width: 20px; height: 20px; }
   .h-footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
   .h-topbar-right span { display: none; }
   .h-topbar-right { gap: 12px; }
