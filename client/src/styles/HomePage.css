@@ -1270,24 +1270,26 @@
   .h-cat-circle { width: 80px; height: 80px; }
   .h-cat-name { font-size: 0.75rem; }
   
-  /* Swipeable Tabs for Mobile */
+  /* Compact Tabs for Mobile (No Swipe) */
   .h-tabs {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    justify-content: flex-start;
-    margin-left: -16px;
-    margin-right: -16px;
-    padding: 0 16px 16px 16px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .h-tabs::-webkit-scrollbar {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px; /* Reduced gap */
+    margin-bottom: 24px; /* Reduced bottom margin */
+    padding: 0;
   }
   .h-tab-btn {
-    flex: 0 0 auto;
-    padding: 10px 20px;
+    flex: 1 1 calc(50% - 12px); /* 2x2 layout */
+    padding: 8px 12px; /* Smaller padding */
+    font-size: 0.75rem; /* Slightly smaller text */
+    text-align: center;
   }
+  
+  /* Reduce space between heading and flourish */
+  .h-section-title { font-size: 1.5rem; letter-spacing: 1px; margin-bottom: 4px !important; }
+  .h-section-flourish { margin-bottom: 8px; font-size: 1.2rem; }
+  .h-section-subtitle { font-size: 0.85rem; margin-bottom: 16px; }
 
   .h-products { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .h-prod-badge { font-size: 0.55rem; padding: 4px 8px; top: 8px; left: 8px; }
