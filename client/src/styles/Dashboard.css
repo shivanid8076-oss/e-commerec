@@ -202,7 +202,7 @@
     height: auto;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
-    padding: 20px;
+    padding: 16px;
   }
 }
 
@@ -261,7 +261,9 @@
 @media (max-width: 900px) {
   .sidebar-nav {
     flex-direction: row;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
   }
 }
 
@@ -296,6 +298,16 @@
   transform: translateX(0);
 }
 
+@media (max-width: 900px) {
+  .sidebar-nav-item {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    flex: 1 1 auto;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
 .sidebar-cta {
   display: flex;
   align-items: center;
@@ -318,6 +330,25 @@
 @media (max-width: 900px) {
   .dashboard-main {
     padding: 24px 16px;
+  }
+  .dashboard-welcome-banner {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .dashboard-welcome-banner h1 {
+    font-size: 1.8rem !important;
+  }
+  .dashboard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+  }
+  .dashboard-actions button {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.85rem;
   }
 }
 
@@ -355,7 +386,7 @@
   backdrop-filter: blur(16px);
   border-radius: 16px;
   border: 1px solid var(--border-color);
-  overflow: hidden;
+  overflow-x: auto;
   box-shadow: var(--shadow-md);
 }
 
