@@ -331,6 +331,17 @@
   .dashboard-main {
     padding: 24px 16px;
   }
+  
+  /* Force all inline grids to stack on mobile */
+  .dashboard-main [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Adjust charts to fit within stacked layout */
+  .dashboard-main .recharts-responsive-container {
+    height: 250px !important;
+  }
+
   .dashboard-welcome-banner {
     flex-direction: column;
     gap: 16px;
