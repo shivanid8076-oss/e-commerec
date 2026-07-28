@@ -1271,7 +1271,25 @@
   .h-cat-name { font-size: 0.75rem; }
   .h-products { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .h-prod-badge { font-size: 0.55rem; padding: 4px 8px; top: 8px; left: 8px; }
-  .h-promo-banners { grid-template-columns: 1fr; gap: 16px; margin-bottom: 24px; }
+  /* Auto-sliding Promo Banners on Mobile */
+  .h-promo-banners { 
+    display: flex; 
+    flex-wrap: nowrap; 
+    overflow: hidden; 
+    margin-bottom: 24px; 
+    gap: 0; 
+  }
+  .h-promo-banners .h-promo-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    border-radius: 0; /* Optional: edge to edge on mobile */
+    animation: promoSlide 8s infinite ease-in-out;
+  }
+  @keyframes promoSlide {
+    0%, 45% { transform: translateX(0); }
+    50%, 95% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+  }
   .h-promo-overlay { padding: 16px; }
   .h-promo-overlay h3 { font-size: 1.4rem; margin-bottom: 8px; }
   
