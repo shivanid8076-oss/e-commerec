@@ -118,8 +118,19 @@ const HomePage = () => {
   const [loadingProducts, setLoadingProducts] = useState(true);
   const [activeTab, setActiveTab] = useState('Bestseller');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   useReveal([dbProducts, activeTab, loadingProducts]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const t = setInterval(() => setSlide(p => (p + 1) % SLIDES.length), 6000);
@@ -185,89 +196,92 @@ const HomePage = () => {
       <div className="h-bg-glow orb-3"></div>
       <div className="h-bg-glow orb-4"></div>
 
-      {/* Top Bar */}
-      <div className="h-topbar">
-        <div className="h-topbar-left">
-          <Link to="/" className="h-logo">Vas<span>tram</span></Link>
-        </div>
-        <div className="h-search">
-          <input type="text" placeholder="Search for Laddu Gopal, Mata Rani dresses..." />
-          <button className="h-search-btn">🔍</button>
-        </div>
-        <div className="h-topbar-right">
-          {isAuthenticated ? (
-            <>
-              {user?.role === 'ADMIN' && (
+      {/* Navigation Area Wrapper for Click Outside */}
+      <div ref={menuRef}>
+        {/* Top Bar */}
+        <div className="h-topbar">
+          <div className="h-topbar-left">
+            <Link to="/" className="h-logo">Vas<span>tram</span></Link>
+          </div>
+          <div className="h-search">
+            <input type="text" placeholder="Search for Laddu Gopal, Mata Rani dresses..." />
+            <button className="h-search-btn">🔍</button>
+          </div>
+          <div className="h-topbar-right">
+            {isAuthenticated ? (
+              <>
+                {user?.role === 'ADMIN' && (
+                  <Link to="/dashboard" className="h-top-action">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span>Seller Hub</span>
+                  </Link>
+                )}
                 <Link to="/dashboard" className="h-top-action">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                  <span>Seller Hub</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  <span>Account</span>
                 </Link>
-              )}
-              <Link to="/dashboard" className="h-top-action">
+                <button onClick={() => logout()} className="h-top-action">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <Link to="/login" className="h-top-action">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <span>Account</span>
+                <span>Login</span>
               </Link>
-              <button onClick={() => logout()} className="h-top-action">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                <span>Logout</span>
-              </button>
-            </>
-          ) : (
-            <Link to="/login" className="h-top-action">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              <span>Login</span>
-            </Link>
-          )}
-          <button className="h-cart-badge h-top-action">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-            <span className="h-cart-count">0</span>
-          </button>
-          <button className="h-mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            {isMobileMenuOpen ? '✕' : '☰'}
-          </button>
+            )}
+            <button className="h-cart-badge h-top-action">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+              <span className="h-cart-count">0</span>
+            </button>
+            <button className="h-mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              {isMobileMenuOpen ? '✕' : '☰'}
+            </button>
+          </div>
         </div>
+
+        {/* Pink Ribbon Nav */}
+        <nav className={`h-ribbon ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+          <div className="h-ribbon-inner">
+            <Link to="/" className="h-ribbon-item">New In & Bestsellers</Link>
+            <Link to="/" className="h-ribbon-item">Devotees Collection</Link>
+
+            <div className="h-ribbon-item">Luxe Edits <span className="h-ribbon-arrow">▾</span>
+              <div className="h-mega">
+                <Link to="/collections/luxe-laddu-gopal-dress">Luxe Laddu Gopal Dress</Link>
+                <Link to="/collections/luxe-mata-rani-dress">Luxe Mata Rani Dress</Link>
+                <Link to="/collections/luxe-rk-dress">Luxe RK Dress</Link>
+                <Link to="/collections/luxe-shringar-jewellery">Luxe Shringar Jewellery Set</Link>
+                <Link to="/collections/luxe-necklace">Luxe Necklace</Link>
+                <Link to="/collections/luxe-mukut">Luxe Mukut</Link>
+                <Link to="/collections/luxe-kangan">Luxe Kangan</Link>
+                <Link to="/collections/luxe-bansuri">Luxe Bansuri</Link>
+              </div>
+            </div>
+
+            <div className="h-ribbon-item">Shop By Deity <span className="h-ribbon-arrow">▾</span>
+              <div className="h-mega-wide">
+                <div><div className="h-mega-title">Laddu Gopal</div><Link to="/collections/soft-pastel-edit">Soft Pastel Edit</Link><Link to="/collections/designer-dresses">Designer Dresses</Link><Link to="/collections/luxe-edit">Luxe Edit</Link><Link to="/collections/summer-collection">Summer Collection</Link><Link to="/collections/woollen-dresses">Woollen Dresses</Link><Link to="/collections/velvet-dresses">Velvet Dresses</Link></div>
+                <div><div className="h-mega-title">Mata Rani</div><Link to="/collections/summer-collection">Summer Collection</Link><Link to="/collections/soft-pastel-edit">Soft Pastel Edit</Link><Link to="/collections/lehenga-patka">Lehenga & Patka</Link><Link to="/collections/designer-dresses">Designer Dresses</Link><Link to="/collections/luxe-edit">Luxe Edit</Link><Link to="/collections/velvet-dresses">Velvet Dresses</Link></div>
+                <div><div className="h-mega-title">RK / Yugal Sarkar</div><Link to="/collections/summer-collection">Summer Collection</Link><Link to="/collections/soft-pastel-edit">Soft Pastel Edit</Link><Link to="/collections/designer-rk-dresses">Designer RK Dresses</Link><Link to="/collections/luxe-edit">Luxe Edit</Link><Link to="/collections/dhoti-patka">Dhoti & Patka</Link><Link to="/collections/shiv-parivar-dress">Shiv Parivar Dress</Link></div>
+              </div>
+            </div>
+
+            <div className="h-ribbon-item">Jewellery <span className="h-ribbon-arrow">▾</span>
+              <div className="h-mega">
+                <Link to="/collections/under-299">Under ₹299</Link>
+                <Link to="/collections/daily-wear-mukut">Daily Wear Mukut</Link><Link to="/collections/luxe-mukut">Luxe Mukut</Link>
+                <Link to="/collections/daily-wear-necklace">Daily Wear Necklace</Link><Link to="/collections/luxe-necklace">Luxe Necklace</Link>
+                <Link to="/collections/designer-bansuri">Designer Bansuri</Link><Link to="/collections/designer-kangan">Designer Kangan</Link>
+                <Link to="/collections/earrings">Earrings</Link><Link to="/collections/maang-tika">Maang Tika</Link><Link to="/collections/chandrika">Chandrika</Link>
+              </div>
+            </div>
+
+            <Link to="/" className="h-ribbon-item">Support</Link>
+          </div>
+        </nav>
       </div>
-
-      {/* Pink Ribbon Nav */}
-      <nav className={`h-ribbon ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-        <div className="h-ribbon-inner">
-          <Link to="/" className="h-ribbon-item">New In & Bestsellers</Link>
-          <Link to="/" className="h-ribbon-item">Devotees Collection</Link>
-
-          <div className="h-ribbon-item">Luxe Edits <span className="h-ribbon-arrow">▾</span>
-            <div className="h-mega">
-              <Link to="/collections/luxe-laddu-gopal-dress">Luxe Laddu Gopal Dress</Link>
-              <Link to="/collections/luxe-mata-rani-dress">Luxe Mata Rani Dress</Link>
-              <Link to="/collections/luxe-rk-dress">Luxe RK Dress</Link>
-              <Link to="/collections/luxe-shringar-jewellery">Luxe Shringar Jewellery Set</Link>
-              <Link to="/collections/luxe-necklace">Luxe Necklace</Link>
-              <Link to="/collections/luxe-mukut">Luxe Mukut</Link>
-              <Link to="/collections/luxe-kangan">Luxe Kangan</Link>
-              <Link to="/collections/luxe-bansuri">Luxe Bansuri</Link>
-            </div>
-          </div>
-
-          <div className="h-ribbon-item">Shop By Deity <span className="h-ribbon-arrow">▾</span>
-            <div className="h-mega-wide">
-              <div><div className="h-mega-title">Laddu Gopal</div><Link to="/collections/soft-pastel-edit">Soft Pastel Edit</Link><Link to="/collections/designer-dresses">Designer Dresses</Link><Link to="/collections/luxe-edit">Luxe Edit</Link><Link to="/collections/summer-collection">Summer Collection</Link><Link to="/collections/woollen-dresses">Woollen Dresses</Link><Link to="/collections/velvet-dresses">Velvet Dresses</Link></div>
-              <div><div className="h-mega-title">Mata Rani</div><Link to="/collections/summer-collection">Summer Collection</Link><Link to="/collections/soft-pastel-edit">Soft Pastel Edit</Link><Link to="/collections/lehenga-patka">Lehenga & Patka</Link><Link to="/collections/designer-dresses">Designer Dresses</Link><Link to="/collections/luxe-edit">Luxe Edit</Link><Link to="/collections/velvet-dresses">Velvet Dresses</Link></div>
-              <div><div className="h-mega-title">RK / Yugal Sarkar</div><Link to="/collections/summer-collection">Summer Collection</Link><Link to="/collections/soft-pastel-edit">Soft Pastel Edit</Link><Link to="/collections/designer-rk-dresses">Designer RK Dresses</Link><Link to="/collections/luxe-edit">Luxe Edit</Link><Link to="/collections/dhoti-patka">Dhoti & Patka</Link><Link to="/collections/shiv-parivar-dress">Shiv Parivar Dress</Link></div>
-            </div>
-          </div>
-
-          <div className="h-ribbon-item">Jewellery <span className="h-ribbon-arrow">▾</span>
-            <div className="h-mega">
-              <Link to="/collections/under-299">Under ₹299</Link>
-              <Link to="/collections/daily-wear-mukut">Daily Wear Mukut</Link><Link to="/collections/luxe-mukut">Luxe Mukut</Link>
-              <Link to="/collections/daily-wear-necklace">Daily Wear Necklace</Link><Link to="/collections/luxe-necklace">Luxe Necklace</Link>
-              <Link to="/collections/designer-bansuri">Designer Bansuri</Link><Link to="/collections/designer-kangan">Designer Kangan</Link>
-              <Link to="/collections/earrings">Earrings</Link><Link to="/collections/maang-tika">Maang Tika</Link><Link to="/collections/chandrika">Chandrika</Link>
-            </div>
-          </div>
-
-          <Link to="/" className="h-ribbon-item">Support</Link>
-        </div>
-      </nav>
 
       {/* Hero */}
       <div className="h-hero">
