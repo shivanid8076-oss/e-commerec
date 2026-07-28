@@ -1314,6 +1314,16 @@
 
   .h-products { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .h-prod-badge { font-size: 0.55rem; padding: 4px 8px; top: 8px; left: 8px; }
+  
+  /* Mobile Product Card Optimizations */
+  .h-prod-info {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    padding: 16px 12px !important; /* Smaller padding for mobile cards */
+  }
+  .h-prod-title { font-size: 0.9rem !important; margin-bottom: 4px !important; }
+  .h-prod-price { font-size: 0.85rem !important; }
+  .h-prod-quick-add { display: none !important; } /* Hide quick add on mobile, tapping goes to product */
   /* Auto-sliding Promo Banners on Mobile */
   .h-promo-banners { 
     display: flex; 
