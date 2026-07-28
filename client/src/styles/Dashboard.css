@@ -329,7 +329,7 @@
 
 @media (max-width: 900px) {
   .dashboard-main {
-    padding: 24px 16px;
+    padding: 20px 12px;
   }
   
   /* Force all inline grids to stack on mobile */
@@ -342,21 +342,40 @@
     height: 250px !important;
   }
 
+  .dashboard-main .pro-card {
+    padding: 16px !important;
+  }
+
+  .dashboard-main .stat-card {
+    padding: 16px !important;
+  }
+
+  .dashboard-main .stat-number {
+    font-size: 1.6rem !important;
+  }
+
   .dashboard-welcome-banner {
     flex-direction: column;
     gap: 16px;
+    align-items: center;
+    text-align: center;
   }
   .dashboard-welcome-banner h1 {
-    font-size: 1.8rem !important;
+    font-size: 1.6rem !important;
+  }
+  .dashboard-welcome-banner p {
+    font-size: 0.95rem;
   }
   .dashboard-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     width: 100%;
+    justify-content: center;
   }
   .dashboard-actions button {
     flex: 1;
+    min-width: 120px;
     text-align: center;
     padding: 10px;
     font-size: 0.85rem;
