@@ -1227,20 +1227,16 @@
   
   .h-ribbon {
     display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
     width: 100%;
     background: rgba(74, 13, 23, 0.98);
     flex-direction: column;
-    z-index: 130;
-    padding: 10px 0;
+    padding: 0;
   }
   .h-ribbon.mobile-open {
-    display: block;
+    display: flex;
   }
-  .h-ribbon-inner { flex-direction: column; gap: 0; padding: 0; }
-  .h-ribbon-item { width: 100%; padding: 16px 20px; font-size: 0.9rem; text-align: left; border: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .h-ribbon-inner { flex-direction: column; gap: 0; padding: 0; width: 100%; }
+  .h-ribbon-item { width: 100%; padding: 16px 20px; font-size: 0.9rem; text-align: left; border: none; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 0; }
   .h-ribbon-item::after { display: none; }
   .h-mega, .h-mega-wide { display: none !important; }
   
