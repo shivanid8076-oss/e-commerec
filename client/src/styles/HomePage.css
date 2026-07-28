@@ -1238,7 +1238,26 @@
   .h-ribbon-inner { flex-direction: column; gap: 0; padding: 0; width: 100%; }
   .h-ribbon-item { width: 100%; padding: 16px 20px; font-size: 0.9rem; text-align: left; border: none; border-bottom: 1px solid rgba(255,255,255,0.05); border-radius: 0; }
   .h-ribbon-item::after { display: none; }
-  .h-mega, .h-mega-wide { display: none !important; }
+  
+  .h-mega, .h-mega-wide {
+    position: static;
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    box-shadow: none;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 10px;
+    gap: 8px;
+    border-radius: 4px;
+  }
+  .h-mega a, .h-mega-wide a {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+  .h-mega-wide > div {
+    width: 100%;
+    margin-bottom: 10px;
+  }
   
   .h-hero-content h1 { font-size: 1.8rem; line-height: 1.2; margin-bottom: 12px; }
   .h-hero-content p { font-size: 0.95rem; margin-bottom: 20px; }
