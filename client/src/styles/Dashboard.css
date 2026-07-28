@@ -353,32 +353,49 @@
   .dashboard-main .stat-number {
     font-size: 1.6rem !important;
   }
-
+  
+  /* Fix Tab Headers and Banner alignment */
+  .dashboard-main .tab-header,
   .dashboard-welcome-banner {
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
+    flex-direction: column !important;
+    align-items: stretch !important;
     text-align: center;
+    gap: 16px !important;
   }
+  
   .dashboard-welcome-banner h1 {
     font-size: 1.6rem !important;
   }
   .dashboard-welcome-banner p {
     font-size: 0.95rem;
   }
-  .dashboard-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    width: 100%;
-    justify-content: center;
+  
+  /* Fix action button rows (Welcome banner & forms) */
+  .dashboard-actions,
+  .dashboard-main form > div[style*="display: flex"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    justify-content: stretch !important;
   }
-  .dashboard-actions button {
-    flex: 1;
-    min-width: 120px;
+  
+  .dashboard-actions button,
+  .dashboard-main form > div[style*="display: flex"] button {
+    width: 100% !important;
+    min-width: 100% !important;
     text-align: center;
-    padding: 10px;
-    font-size: 0.85rem;
+    padding: 12px !important;
+    font-size: 0.9rem;
+  }
+
+  /* Wrap inline flex rows in settings and products */
+  .dashboard-main .pro-card div[style*="display: flex"] {
+    flex-wrap: wrap;
+  }
+  
+  .dashboard-main .pro-card div[style*="flex: 1"] {
+    min-width: 100%;
   }
 }
 
