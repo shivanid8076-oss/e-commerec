@@ -1266,10 +1266,30 @@
   .h-section { padding: 40px 16px; }
   .h-section-title { font-size: 1.6rem; letter-spacing: 1px; }
   .h-section-subtitle { font-size: 0.85rem; }
-  .h-categories { gap: 12px; justify-content: flex-start; }
-  .h-cat-item { min-width: 80px; }
-  .h-cat-circle { width: 80px; height: 80px; }
-  .h-cat-name { font-size: 0.75rem; }
+  /* Shop by Deity - Mobile Swipeable (No auto-marquee) */
+  .h-marquee-wrapper {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 10px;
+  }
+  .h-marquee-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .h-categories-track { 
+    animation: none !important; 
+    padding: 10px 16px !important; 
+    gap: 16px !important; 
+  }
+  .h-cat-item { 
+    min-width: 76px; 
+    scroll-snap-align: start;
+  }
+  .h-cat-circle { width: 76px; height: 76px; margin-bottom: 10px; }
+  .h-cat-name { font-size: 0.7rem; }
   
   /* Compact Tabs for Mobile (No Swipe) */
   .h-tabs {
