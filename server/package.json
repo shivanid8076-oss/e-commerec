@@ -1,0 +1,33 @@
+{
+  "name": "secure-app-server",
+  "version": "1.0.0",
+  "description": "Secure Express.js backend with JWT auth and PostgreSQL",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:generate": "npx prisma generate",
+    "prisma:studio": "npx prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "axios": "^1.18.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.3",
+    "razorpay": "^2.9.6",
+    "xss": "^1.0.15"
+  },
+  "devDependencies": {
+    "prisma": "^6.9.0"
+  }
+}

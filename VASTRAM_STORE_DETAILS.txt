@@ -1,0 +1,154 @@
+=====================================================================
+                 VASTRAM - PREMIUM E-COMMERCE PLATFORM 
+                       COMPLETE STORE DOCUMENTATION
+=====================================================================
+
+1. PROJECT OVERVIEW & ARCHITECTURE
+---------------------------------------------------------------------
+Name: Vastram (Formerly Rishigyan)
+Type: Secure, Enterprise-Grade E-Commerce Store & Seller Dashboard
+Architecture: 
+- Frontend: React.js (Vite)
+- Backend: Node.js with Express.js
+- Database ORM: Prisma
+- Data Visualization: Recharts
+
+2. UI/UX DESIGN & AESTHETICS (FRONTEND)
+---------------------------------------------------------------------
+The entire store, specifically the Seller Dashboard, has been upgraded to a "Pro-Level" modern aesthetic, taking inspiration from top-tier platforms like Stripe and Apple:
+- Glassmorphism: Cards, tooltips, and sidebars feature blurred transparent backgrounds that adapt to the underlying canvas.
+- Dynamic Theming: A 1-click seamless toggle between "☀️ Light Mode" (Crisp White/Silver glass) and "🌙 Dark Mode" (Deep Slate & Rose Pink accent) without page reloads.
+- Minimalist Typography: Clean, non-cluttered fonts with generous spacing.
+- Vibrant Gradients: Subtle neon-like hover effects and trend indicator pills (e.g., +12.5% Growth) for a highly professional look.
+- Interactive Feedback: Smooth CSS keyframe animations, toast notifications, and hover elevations.
+
+3. ADVANCED SELLER FEATURES (DASHBOARD TABS)
+---------------------------------------------------------------------
+A) Dashboard Overview:
+   - Real-time Revenue & Order tracking.
+   - Live Active Visitor Simulation widget.
+   - Dynamic Recharts for Revenue Time-Series (Daily/Weekly/Monthly) and Order Status pie charts.
+   - "Needs Attention" Action Items (Low stock, Pending Orders).
+
+B) Product Management (Add Product):
+   - Advanced Single Product Entry with real-time SEO Google Preview.
+   - Interactive Profit Margin Calculator (Cost vs. Selling Price).
+   - Auto SKU Generator.
+   - Bulk Product Upload via CSV.
+
+C) Inventory Control:
+   - Dual-view interface (Grid & Table modes).
+   - Advanced sorting (by Price, Name, Date).
+   - Visual Sales Velocity tracking and Low-Stock Alert badges.
+   - Bulk actions (Delete, Mark Out-of-Stock).
+
+D) Order Management:
+   - Advanced Date-Range and Status filters.
+   - Bulk action selectors (Mark Completed, Cancel Orders, Print Invoices).
+   - Built-in HTML Invoice Printer.
+   - **One-Click WhatsApp Automation**: Marking an order as 'COMPLETED' automatically drafts and opens a personalized WhatsApp message for the customer.
+
+E) Customer CRM:
+   - Automated Customer Segmentation (Tags: VIP, Loyal, New).
+   - Customer Lifetime Value (LTV) and Average Order tracking.
+   - Export CRM Data to CSV.
+   - Direct WhatsApp Outreach buttons.
+
+F) Advanced Store Settings:
+   - Maintenance Mode (Global Store Offline Toggle).
+   - Dynamic Shipping (Flat Rate & Free Shipping thresholds) & Tax Rules.
+   - Payment Gateway Toggles (UPI, COD, Cards).
+   - Live Preview Announcement Banner (Configurable Colors/Text).
+   - Global SEO Meta Settings & Social Media Integrations.
+
+4. ENTERPRISE-LEVEL SECURITY (BACKEND)
+---------------------------------------------------------------------
+The "Secure-App" backend features 5 robust middlewares to protect the store:
+- Authentication (auth.js): JWT-based verification ensuring strict Role-Based Access Control (RBAC). Only Admins can access the dashboard.
+- DDoS Protection (rateLimiter.js): Prevents server crashes and blocks bots from brute-forcing passwords.
+- Hacker Code Blocking (sanitize.js): Neutralizes malicious scripts (XSS) and dangerous database queries before they reach the server.
+- Security Logging (securityLogger.js): Maintains a permanent CCTV-like audit trail of admin logins and critical actions with IP tracking.
+- Input Validation (validate.js): Ensures strict formatting for emails, passwords, and phone numbers to keep data clean.
+- Password Hashing: Bcrypt encryption ensures user passwords are mathematically scrambled in the database.
+- SQL Injection Proof: Handled natively by the Prisma ORM.
+
+=====================================================================
+END OF DOCUMENT
+=====================================================================
+
+5. PROJECT FOLDER & FILE STRUCTURE (DIRECTORY MAP)
+---------------------------------------------------------------------
+Below is the complete file and folder structure of the secure-app along with the use of each major file:
+
+secure-app/
+├── client/                     # FRONTEND (React.js + Vite)
+│   ├── index.html              # Main HTML template for the React app
+│   ├── src/                    # Frontend source code
+│   │   ├── App.jsx             # Main Router and layout wrapper
+│   │   ├── index.css           # Global CSS variables, Glassmorphism & Themes
+│   │   ├── main.jsx            # React mounting point
+│   │   ├── components/         # Reusable UI parts & Dashboard Tabs
+│   │   │   ├── AddProductTab.jsx   # Form to create new products & SEO preview
+│   │   │   ├── AdminOrdersTab.jsx  # Order management, WhatsApp auto-draft
+│   │   │   ├── AnnouncementBanner.jsx # Top storefront scrolling banner
+│   │   │   ├── CartDrawer.jsx      # Slide-out shopping cart for users
+│   │   │   ├── CheckoutModal.jsx   # Modal for checkout & payment details
+│   │   │   ├── CustomersTab.jsx    # CRM, segmentation, and customer list
+│   │   │   ├── InventoryTab.jsx    # Grid/Table view of all products
+│   │   │   ├── Navbar.jsx          # Storefront top navigation bar
+│   │   │   ├── OverviewTab.jsx     # Main dashboard analytics (Recharts)
+│   │   │   ├── ProtectedRoute.jsx  # Security wrapper to block unauthorized users
+│   │   │   └── StoreSettingsTab.jsx# Global settings (Tax, Shipping, SEO)
+│   │   ├── context/
+│   │   │   └── AuthContext.jsx     # Manages user login state globally
+│   │   ├── pages/              # Full-page views
+│   │   │   ├── AdminDashboard.jsx  # Old Admin portal (superseded)
+│   │   │   ├── Collection.jsx      # Storefront product listing page
+│   │   │   ├── Dashboard.jsx       # Main Seller Dashboard container
+│   │   │   ├── Dashboard.css       # Premium Dark Mode & Glassmorphism styles
+│   │   │   ├── HomePage.jsx        # Storefront main landing page
+│   │   │   ├── Login.jsx           # User & Admin login page
+│   │   │   ├── ProductDetail.jsx   # Single product view page
+│   │   │   └── Register.jsx        # New user registration page
+│   │   └── utils/
+│   │       ├── api.js              # Axios configuration to connect to backend
+│   │       └── validators.js       # Frontend form validation logic
+│   └── vite.config.js          # Vite bundler configuration
+│
+├── server/                     # BACKEND (Node.js + Express + Prisma)
+│   ├── server.js               # Main entry point that starts the backend server
+│   ├── app.js                  # Express app setup and middleware registration
+│   ├── package.json            # Backend dependencies
+│   ├── prisma/
+│   │   └── schema.prisma       # Database schema (Models for User, Product, Order)
+│   ├── src/                    # Backend source code
+│   │   ├── config/
+│   │   │   └── db.js           # Database connection logic
+│   │   ├── controllers/        # Business logic for API endpoints
+│   │   │   ├── auth.controller.js      # Login, Registration, JWT generation
+│   │   │   ├── order.controller.js     # Create, update, and fetch orders
+│   │   │   ├── product.controller.js   # Add, edit, delete products
+│   │   │   ├── settings.controller.js  # Manage store configurations
+│   │   │   ├── stats.controller.js     # Data aggregation for Dashboard charts
+│   │   │   └── user.controller.js      # User management
+│   │   ├── middleware/         # Security guards and request interceptors
+│   │   │   ├── auth.js             # Checks JWT tokens and verifies Admin roles
+│   │   │   ├── rateLimiter.js      # Blocks brute-force and DDoS attacks
+│   │   │   ├── sanitize.js         # Cleans inputs to prevent XSS/SQL Injection
+│   │   │   ├── securityLogger.js   # Logs sensitive actions to security.log
+│   │   │   └── validate.js         # Validates incoming request data formats
+│   │   ├── routes/             # Defines API URL paths (e.g., /api/orders)
+│   │   │   ├── auth.routes.js, order.routes.js, product.routes.js, etc.
+│   │   ├── utils/
+│   │   │   ├── helpers.js          # Misc helper functions
+│   │   │   └── notification.js     # Mock Email/SMS/WhatsApp notification service
+│   │   └── validators/
+│   │       └── auth.validator.js   # Rules for login/signup data
+│   ├── logs/
+│   │   └── security.log        # Permanent audit trail of security events
+│   ├── createAdmin.js          # Script to create the first admin user
+│   └── seed.js                 # Script to populate database with dummy data
+│
+└── start.sh                    # Bash script to start both frontend and backend
+
+=====================================================================

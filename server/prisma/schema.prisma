@@ -1,0 +1,135 @@
+// Prisma Schema for Secure App
+// Using PostgreSQL with UUID primary keys
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique @db.VarChar(50)
+  email     String   @unique @db.VarChar(255)
+  password  String   // bcrypt hash — never exposed in API responses
+  role      Role     @default(USER)
+  resetToken String? @map("reset_token")
+  resetTokenExpiry DateTime? @map("reset_token_expiry")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  reviews   Review[]
+
+  @@map("users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Product {
+  id        String   @id @default(uuid())
+  title     String
+  slug      String   @unique
+  category  String
+  price     Float
+  compare   Float?
+  sizes     String[]
+  images    String[] // Base64 strings
+  isFeatured Boolean @default(false) @map("is_featured")
+  isOutOfStock Boolean @default(false) @map("is_out_of_stock")
+  createdAt DateTime @default(now()) @map("created_at")
+  reviews   Review[]
+
+  @@map("products")
+}
+
+model StoreSetting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("store_settings")
+}
+
+model Order {
+  id              String   @id @default(uuid())
+  customerName    String   @map("customer_name")
+  email           String
+  phone           String
+  address         String
+  pincode         String
+  productId       String   @map("product_id")
+  productName     String   @map("product_name")
+  size            String
+  quantity        Int
+  totalPrice      Float    @map("total_price")
+  paymentMethod   String   @map("payment_method") @default("UPI")
+  paymentStatus   String   @default("PENDING") // PENDING, PAID, FAILED
+  razorpayOrderId String?  @map("razorpay_order_id")
+  razorpayPaymentId String? @map("razorpay_payment_id")
+  status          String   @default("PENDING") // PENDING, COMPLETED, CANCELLED, RETURN_REQUESTED, RETURNED, REFUNDED
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@map("orders")
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+  userId    String?    @unique @map("user_id") // Optional, for logged in users
+  sessionId String?    @unique @map("session_id") // For guest users
+  items     CartItem[]
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        String  @id @default(uuid())
+  cartId    String  @map("cart_id")
+  productId String  @map("product_id")
+  quantity  Int     @default(1)
+  size      String?
+
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  @@map("cart_items")
+}
+
+model Coupon {
+  id            String   @id @default(uuid())
+  code          String   @unique
+  discountType  String   @map("discount_type") // PERCENTAGE or FLAT
+  discountValue Float    @map("discount_value")
+  minOrderValue Float?   @map("min_order_value")
+  maxDiscount   Float?   @map("max_discount") // Only applicable for PERCENTAGE
+  isActive      Boolean  @default(true) @map("is_active")
+  expiryDate    DateTime? @map("expiry_date")
+  usageLimit    Int?     @map("usage_limit") // Total times it can be used
+  usedCount     Int      @default(0) @map("used_count")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("coupons")
+}
+
+model Review {
+  id          String   @id @default(uuid())
+  productId   String   @map("product_id")
+  userId      String   @map("user_id")
+  rating      Int      // 1 to 5
+  title       String?
+  comment     String?
+  isVerifiedPurchase Boolean @default(false) @map("is_verified_purchase")
+  isApproved  Boolean  @default(true) @map("is_approved") // Admins can unapprove spam
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, userId]) // One user can review a product only once
+  @@map("reviews")
+}

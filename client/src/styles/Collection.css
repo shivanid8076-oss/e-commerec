@@ -1,0 +1,456 @@
+/* ============================================
+   Collection Page — Earthy & Elegant Ethnic Wear
+   ============================================ */
+
+.collection-page {
+  /* Earthy Palette */
+  --c-bg: #faf9f6; /* Warm Alabaster */
+  --c-card-bg: #ffffff;
+  --c-text: #3d352e; /* Deep Charcoal Brown */
+  --c-text-sec: #75695f; /* Soft Taupe */
+  --c-text-muted: #a3998f;
+  --c-border: #e8e4db; /* Warm Grey/Beige Border */
+  
+  --c-accent: #b85a44; /* Terracotta / Clay */
+  --c-accent-hover: #9c4c39;
+  --c-gold: #c7a17a; /* Antique Gold */
+  
+  --c-font-display: 'Playfair Display', Georgia, serif;
+  --c-font-body: 'Outfit', -apple-system, sans-serif;
+  
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--c-font-body);
+  min-height: 100vh;
+}
+
+/* ========== EARTHY HERO HEADER ========== */
+.c-hero {
+  padding: 40px 40px 30px;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 60px;
+}
+
+.c-hero-left {
+  flex: 1.5;
+}
+
+.c-hero-right {
+  flex: 1;
+  max-width: 450px;
+  opacity: 0;
+  animation: slideFadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+}
+
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.c-breadcrumb {
+  font-size: 0.8rem;
+  color: var(--c-text-muted);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+.c-breadcrumb a {
+  color: var(--c-text-sec);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.c-breadcrumb a:hover {
+  color: var(--c-accent);
+}
+.c-breadcrumb span {
+  margin: 0 12px;
+  color: var(--c-gold);
+}
+
+.c-title {
+  font-family: var(--c-font-display);
+  font-size: 3rem;
+  font-weight: 500;
+  color: var(--c-text);
+  margin-bottom: 0;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.c-desc {
+  font-size: 1rem;
+  color: var(--c-text-sec);
+  line-height: 1.7;
+  font-weight: 300;
+  margin: 0;
+  border-left: 2px solid var(--c-accent);
+  padding-left: 20px;
+}
+
+/* ========== LAYOUT ========== */
+.c-layout {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+  gap: 60px;
+}
+
+/* ========== SIDEBAR FILTERS ========== */
+.c-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+}
+
+.c-filter-group {
+  border-bottom: 1px solid var(--c-border);
+  padding: 24px 0;
+}
+
+.c-filter-title {
+  font-family: var(--c-font-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--c-text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.c-filter-icon {
+  font-family: var(--c-font-body);
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--c-text-muted);
+}
+
+.c-filter-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.c-filter-group.expanded .c-filter-content {
+  max-height: 500px;
+  padding-top: 20px;
+  opacity: 1;
+}
+
+/* Color Swatches */
+.c-filter-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.c-swatch-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 3px;
+}
+
+.c-swatch-wrap:hover, .c-swatch-wrap.active {
+  border-color: var(--c-gold);
+}
+
+.c-swatch {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Elegant Pill Toggles */
+.c-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.c-pill {
+  padding: 8px 16px;
+  border: 1px solid var(--c-border);
+  border-radius: 4px; /* Slightly rounded, elegant corners */
+  font-size: 0.85rem;
+  color: var(--c-text-sec);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  user-select: none;
+}
+
+.c-pill:hover {
+  border-color: var(--c-accent);
+  color: var(--c-accent);
+}
+
+.c-pill.active {
+  background: var(--c-accent);
+  color: white;
+  border-color: var(--c-accent);
+}
+
+/* Simple Checkbox for Availability */
+.c-filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.c-filter-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  color: var(--c-text-sec);
+  cursor: pointer;
+}
+
+.c-filter-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--c-accent);
+  cursor: pointer;
+}
+
+/* ========== PRODUCT GRID ========== */
+.c-main {
+  flex: 1;
+}
+
+.c-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.c-count {
+  font-size: 0.9rem;
+  color: var(--c-text-sec);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.c-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.c-grid-toggles {
+  display: flex;
+  gap: 6px;
+}
+
+.c-grid-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--c-text-muted);
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.c-grid-btn:hover, .c-grid-btn.active {
+  color: var(--c-accent);
+}
+
+.c-sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--c-text-sec);
+}
+
+.c-custom-select {
+  padding: 8px 30px 8px 12px;
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--c-border);
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--c-text);
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233d352e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 16px;
+  transition: border-color 0.3s;
+}
+.c-custom-select:hover {
+  border-bottom-color: var(--c-accent);
+}
+
+.c-grid {
+  display: grid;
+  gap: 40px 20px;
+  transition: all 0.3s ease;
+}
+
+.c-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.c-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* ========== EARTHY PRODUCT CARDS ========== */
+.c-prod-card {
+  background: transparent;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.c-prod-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+  background: #f0ebe4;
+  border-radius: 8px; /* Soft rounding */
+}
+
+.c-prod-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.c-prod-card:hover .c-prod-img img {
+  transform: scale(1.05);
+}
+
+/* Quick Add Button (Elegant minimal style) */
+.c-quick-add {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  width: 80%;
+  padding: 12px 0;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--c-text);
+  font-family: var(--c-font-body);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.c-prod-card:hover .c-quick-add {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+
+.c-quick-add:hover {
+  background: var(--c-text);
+  color: white;
+}
+
+/* Elegant Badges */
+.c-prod-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 4px 12px;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  z-index: 2;
+  font-family: var(--c-font-body);
+}
+
+.c-prod-badge.new { background: white; color: var(--c-text); }
+.c-prod-badge.bestseller { background: var(--c-accent); color: white; }
+.c-prod-badge.luxe { background: var(--c-gold); color: white; }
+
+/* Product Info */
+.c-prod-info {
+  padding: 20px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left aligned for elegant feel */
+}
+
+.c-prod-title {
+  font-family: var(--c-font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--c-text);
+  margin-bottom: 8px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.c-prod-price {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--c-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.c-prod-price .orig {
+  font-size: 0.85rem;
+  color: var(--c-text-muted);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1200px) {
+  .c-grid { grid-template-columns: repeat(3, 1fr); gap: 30px 20px; }
+}
+
+@media (max-width: 1024px) {
+  .c-layout { padding: 0 30px 60px; gap: 40px; }
+  .c-sidebar { width: 220px; }
+}
+
+@media (max-width: 768px) {
+  .c-hero { 
+    padding: 40px 20px; 
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .c-desc {
+    border-left: none;
+    padding-left: 0;
+  }
+  .c-title { font-size: 2.2rem; }
+  .c-layout { padding: 0 20px 40px; flex-direction: column; gap: 20px; }
+  .c-sidebar { width: 100%; display: none; }
+  .c-grid { grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
+  .c-prod-title { font-size: 0.95rem; }
+  .c-quick-add { display: none; /* Hide on mobile for cleaner tap interface */ }
+}
